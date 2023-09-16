@@ -1,7 +1,7 @@
 @import "../../common/colors.scss";
 
 .movie-card{
-    width: 150px;
+    min-width: 150px;
     aspect-ratio: 1/2;
     border-radius: $img-border-radius;
     white-space:normal;
