@@ -2,6 +2,7 @@
 
 .movie-list{
  margin :20px 0;
+ position: relative;
  h2{
     color: $font-secondary;
     margin-bottom: 10px;
@@ -11,5 +12,19 @@
 .movie-container{
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap
+    overflow: scroll;
 }
+.movie-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 100%;
+    background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.1) 90%
+  );
+  pointer-events: none;
+  }
