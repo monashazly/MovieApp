@@ -1,0 +1,23 @@
+@import "../../common/colors.scss";
+
+.actor-card{
+    min-width: 138px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.actor-profile{
+    width: 100%;
+    object-fit: cover;
+}
+.actor-name{
+  padding: 0 10px;
+  font-weight: 700;
+}
+.actor-character{
+    font-size: .9em;
+    font-weight: 300;
+    padding: 0 10px;
+}

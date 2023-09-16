@@ -1,0 +1,10 @@
+@import "../../common/colors.scss";
+
+.cast-container{
+   display: flex;
+   justify-content: space-between;
+   overflow: scroll;
+   gap : 10px;
+   box-sizing: border-box;
+   padding: 40px 0;
+}
