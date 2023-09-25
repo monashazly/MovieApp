@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import MovieCard from "../MovieCard/MovieCard";
 import "./MovieListing.scss"
+import Loader from "../Loader/Loader";
 
 const MovieListing = () => {
   const movies = useSelector((state) => state.movies.movies);
@@ -12,7 +13,7 @@ const MovieListing = () => {
 
   movieRender = movies.length ? (movies.map((movie) => (
     <MovieCard key={movie.id} movie={movie}></MovieCard>
-    ))) : ''
+    ))) : <div className="loader-container"> <Loader></Loader> </div>
     seriesRender = series.length ? (series.map((serie) => (
       <MovieCard key={serie.id} movie={serie}></MovieCard>
     ))) : ''
