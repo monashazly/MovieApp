@@ -1,33 +1,26 @@
 import { useEffect, useState } from "react";
+import { useDispatch , useSelector } from "react-redux"
 import {useParams} from "react-router-dom"
 import { imgBaseURL } from "../../common/apis/imgBaseURL";
 import "./MovieBackdrop.scss";
 import MovieRating from "../MovieRating/MovieRating";
-import movieApi from "../../common/apis/movieApi";
-import { api_key } from "../../common/apis/movieApiKey";
+import {fetchMovie} from "../../features/rtk/movies/movieSlice"
 
 const MovieBackdrop = () => {
 
   const [releaseDate, setReleaseDate] = useState();
-  const [movie, setMovie] = useState({});
   const { TMDPID } = useParams();
-
-    const params = {
-      api_key,
-    };
+  const dispatch = useDispatch();
+  const movie = useSelector(state => state.movies.selectedMovie)
 
   useEffect(() => {
 
-    const getMovie = async () => {
-      const response = await movieApi.get(`/movie/${TMDPID}`, { params });
-      setMovie(response.data);
-    };
+    dispatch(fetchMovie(TMDPID))
 
-    getMovie();
-  }, []);
+  }, [dispatch , TMDPID ]);
 
   useEffect(() => {
-    const dateString = movie.release_date;
+    const dateString = movie?.release_date;
     const dateObject = new Date(dateString);
     const year = dateObject.getFullYear();
     setReleaseDate(year);
@@ -36,23 +29,23 @@ const MovieBackdrop = () => {
   return (
     <div
       className="backdrop"
-      style={{ backgroundImage: `url(${imgBaseURL + movie.backdrop_path})` }}
+      style={{ backgroundImage: `url(${imgBaseURL + movie?.backdrop_path})` }}
     >
       <div className="movie-content">
         <div className="movie-poster">
           <img
             className="poster"
-            src={imgBaseURL + movie.poster_path}
-            alt={movie.title}
+            src={imgBaseURL + movie?.poster_path}
+            alt={movie?.title}
           />
         </div>
         <div className="movie-info">
           <div className="movie-header">
             {" "}
-            {movie.title + `(${releaseDate})`}{" "}
+            {movie?.title + `(${releaseDate})`}{" "}
           </div>
           <div className="genre">
-            {movie.genres?.map((genre, index) => (
+            {movie?.genres?.map((genre, index) => (
               <span key={genre.id}>
                 {genre.name +
                   " " +
@@ -61,11 +54,11 @@ const MovieBackdrop = () => {
             ))}
           </div>
           <div className="rating">
-            <MovieRating rate={movie.vote_average}></MovieRating>
+            <MovieRating rate={movie?.vote_average}></MovieRating>
           </div>
-          <div className="tagline">{movie.tagline}</div>
+          <div className="tagline">{movie?.tagline}</div>
           <h2>Overview</h2>
-          <div className="overview">{movie.overview}</div>
+          <div className="overview">{movie?.overview}</div>
         </div>
       </div>
     </div>

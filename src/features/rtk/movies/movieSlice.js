@@ -7,10 +7,15 @@ const params = {
   };
 
 const initialState = {
-  movies : {},
-  series : {}
+  movies : [],
+  series : [],
+  selectedMovie : {}
 }
 
+export const fetchMovieWithApi = createAsyncThunk('movieSlice/fetchMovieWithApi' , async(TMDPID)=>{
+   const response = await movieApi.get(`/movie/${TMDPID}`, { params });
+   return response.data
+})
 
 export const fetchMovies = createAsyncThunk('movieSlice/fetchMovies' , async()=>{
     const response = await movieApi.get(`/movie/popular` , {params})
@@ -22,25 +27,43 @@ export const fetchSeries = createAsyncThunk('movieSlice/fetchSeries' , async()=>
   return response.data.results
 }) 
 
+export const fetchMovie = createAsyncThunk('movieSlice/fetchMovie', async (selectedId , { getState , dispatch}) => {
+   const state = getState().movies;
+   console.log('state' , state)
+   if(!state.movies.length){
+      console.log('hey')
+       dispatch(fetchMovieWithApi(selectedId))
+   } else
+   {
+      const selectedMovie = state.movies.find((movie) => movie.id == selectedId);
+      return selectedMovie;
+   }
+ });
+
 const movieSlice = createSlice({
     name :'movieSlice' ,
     initialState ,
     reducers :{
        addMovies : (state , action) => {
         state.movies = action.payload;
-       }
+       },
+       setSelectedMovie: (state, action) => {
+         state.selectedMovie = action.payload;
+       },
     },
     extraReducers :(builder)=>{
-      builder.addCase(fetchMovies.pending , (state , action)=>{
-      })
        builder.addCase(fetchMovies.fulfilled , (state , action)=>{
           return { ...state , movies : action.payload} 
        })
-       builder.addCase(fetchSeries.rejected , (state , action)=>{
-          console.log('series rejected')
-      })
        builder.addCase(fetchSeries.fulfilled , (state , action)=>{
           return { ...state , series : action.payload} 
+       })
+       builder.addCase(fetchMovie.fulfilled , (state , action)=>{
+          state.selectedMovie = action.payload
+       })
+       builder.addCase(fetchMovieWithApi.fulfilled , (state , action)=>{
+         console.log('action' , action.payload)
+          state.selectedMovie = action.payload
        })
     }
 })
