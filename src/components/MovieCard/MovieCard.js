@@ -8,7 +8,7 @@ function MovieCard(props) {
 
   return (
     <div className="movie-card">
-      <Link to={`/movie/${movie.id}`}>
+      <Link className="link-style" to={`/movie/${movie.id}`}>
         <div className="card-img-container">
           <img
             className="card-img"

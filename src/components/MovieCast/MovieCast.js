@@ -17,7 +17,6 @@ const MovieCast = () => {
         const fetchCast = async()=>{
             const cast = await movieApi.get(`/movie/${TMDPID}/credits`, { params })
             setCast(cast.data.cast.slice(0,10))
-            console.log('cast' , cast.data.cast.slice(0,10))
         }
 
         fetchCast();

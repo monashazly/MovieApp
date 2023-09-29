@@ -7,9 +7,8 @@ import Loader from "../Loader/Loader";
 const MovieListing = () => {
   const movies = useSelector((state) => state.movies.movies);
   const series = useSelector((state) => state.movies.series);
- 
-  let movieRender = ''
-  let seriesRender = ''
+  let movieRender = '';
+  let seriesRender = '';
 
   movieRender = movies.length ? (movies.map((movie) => (
     <MovieCard key={movie.id} movie={movie}></MovieCard>

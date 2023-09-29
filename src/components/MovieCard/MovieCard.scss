@@ -1,5 +1,9 @@
 @import "../../common/colors.scss";
 
+.link-style{
+    text-decoration: none;
+}
+
 .movie-card{
     min-width: 150px;
     aspect-ratio: 1/2;
@@ -35,6 +39,7 @@
     font-weight: 700;
     color: #000;
     font-size: 16px;
+    text-decoration: none;
 }
 .movie-date{
     font-size : 1em;

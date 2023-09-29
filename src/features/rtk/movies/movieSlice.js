@@ -29,11 +29,10 @@ export const fetchSeries = createAsyncThunk('movieSlice/fetchSeries' , async()=>
 
 export const fetchMovie = createAsyncThunk('movieSlice/fetchMovie', async (selectedId , { getState , dispatch}) => {
    const state = getState().movies;
-   console.log('state' , state)
    if(!state.movies.length){
-      console.log('hey')
        dispatch(fetchMovieWithApi(selectedId))
-   } else
+   } 
+   else
    {
       const selectedMovie = state.movies.find((movie) => movie.id == selectedId);
       return selectedMovie;
@@ -62,7 +61,6 @@ const movieSlice = createSlice({
           state.selectedMovie = action.payload
        })
        builder.addCase(fetchMovieWithApi.fulfilled , (state , action)=>{
-         console.log('action' , action.payload)
           state.selectedMovie = action.payload
        })
     }
