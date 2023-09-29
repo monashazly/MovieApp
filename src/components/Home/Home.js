@@ -1,11 +1,32 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MovieListing from "../MovieListing/MovieListing";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, fetchSeries } from "../../features/rtk/movies/movieSlice";
 import "./Home.scss";
 
 function Home() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const movies = useSelector((state) => state.movies.movies);
+
+  const searchMovie = () => {
+    const movie = searchQuery
+      ? movies.find((movie) => movie.title.toLowerCase().includes(searchQuery))
+      : null;
+    const movieID = movie ? movie.id : null;
+    navigate(`/movie/${movieID}`);
+  };
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleKeyUp = (e) => {
+      if (e.key === "Enter") {
+        searchMovie();
+      }
+  }
 
   useEffect(() => {
     dispatch(fetchMovies());
@@ -17,8 +38,19 @@ function Home() {
       <div className="home-banner">
         <div className="search-contianer">
           <h1>Welcome.</h1>
-          <h2>Millions of movies, TV shows and people to discover. Explore now.</h2>
-          <input className="form-control mt-3 w-100" type="text"  placeholder="Search Movies"/>
+          <h2>
+            Millions of movies, TV shows and people to discover. Explore now.
+          </h2>
+          <div className="input-container">
+            <input
+              className=" input-style"
+              type="text"
+              placeholder="Search Movies...."
+              onChange={handleSearch}
+              onKeyUp={handleKeyUp}
+            />
+            <input type="submit" onClick={searchMovie} value="Search"/>
+          </div>
         </div>
       </div>
       <MovieListing></MovieListing>

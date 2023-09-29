@@ -10,3 +10,27 @@
     color: white;
     padding : 40px 30px;
 }
+.input-style{
+    padding: 10px 20px;
+    border-radius: 30px;
+    margin-top: 50px;
+    border-style: none;
+    width: 100%;
+}
+.input-container{
+    position: relative;
+}
+input[type ="submit"]{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 30px;
+    padding: 10px 20px;
+    border-style: none;
+    background: linear-gradient(to right,rgb(1,183,223) 0%, rgb(154,210,174) 100%);
+    color: white;
+    font-weight: 500;
+}
+input[type ="submit"]:hover{
+    color: black;
+}
