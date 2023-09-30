@@ -50,7 +50,7 @@ function Home() {
               onChange={handleSearch}
               onKeyUp={handleKeyUp}
             />
-            <input type="submit" onClick={searchMovie} value="Search"/>
+            <button className="search-btn" onClick={searchMovie}>Search</button>
           </div>
         </div>
       </div>
