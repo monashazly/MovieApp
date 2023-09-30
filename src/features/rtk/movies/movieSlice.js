@@ -7,25 +7,22 @@ const params = {
   };
 
 const initialState = {
-  movies : [],
-  series : [],
+  nowPlaying : [],
+  topRated :[],
+  upcoming :[],
   selectedMovie : {}
 }
 
 export const fetchMovieWithApi = createAsyncThunk('movieSlice/fetchMovieWithApi' , async(TMDPID)=>{
    const response = await movieApi.get(`/movie/${TMDPID}`, { params });
-   return response.data
+   return  response.data
 })
 
-export const fetchMovies = createAsyncThunk('movieSlice/fetchMovies' , async()=>{
-    const response = await movieApi.get(`/movie/popular` , {params})
-    return response.data.results
+export const fetchMovies = createAsyncThunk('movieSlice/fetchMovies' , async(type)=>{
+    const response = await movieApi.get(`/movie/${type}` , {params})
+    return {data : response.data.results , type} 
 }) 
 
-export const fetchSeries = createAsyncThunk('movieSlice/fetchSeries' , async()=>{
-  const response = await movieApi.get(`/tv/popular` , {params})
-  return response.data.results
-}) 
 
 export const fetchMovie = createAsyncThunk('movieSlice/fetchMovie', async (selectedId , { getState , dispatch}) => {
    const state = getState().movies;
@@ -52,10 +49,9 @@ const movieSlice = createSlice({
     },
     extraReducers :(builder)=>{
        builder.addCase(fetchMovies.fulfilled , (state , action)=>{
-          return { ...state , movies : action.payload} 
-       })
-       builder.addCase(fetchSeries.fulfilled , (state , action)=>{
-          return { ...state , series : action.payload} 
+            if(action.payload.type === 'now_playing') return { ...state , nowPlaying :  action.payload.data} 
+            else if(action.payload.type === 'upcoming') return { ...state , upcoming : action.payload.data} 
+            return { ...state , topRated : action.payload.data} 
        })
        builder.addCase(fetchMovie.fulfilled , (state , action)=>{
           state.selectedMovie = action.payload

@@ -5,31 +5,42 @@ import "./MovieListing.scss"
 import Loader from "../Loader/Loader";
 
 const MovieListing = () => {
-  const movies = useSelector((state) => state.movies.movies);
-  const series = useSelector((state) => state.movies.series);
-  let movieRender = '';
-  let seriesRender = '';
+  const nowPlaying = useSelector((state) => state.movies.nowPlaying);
+  const upcoming = useSelector((state) => state.movies.upcoming);
+  const topRated = useSelector((state) => state.movies.topRated);
+  
+  let nowPlayingRender = '';
+  let upcomingRender = '';
+  let topRatedRender = '';
 
-  movieRender = movies.length ? (movies.map((movie) => (
+  nowPlayingRender = nowPlaying.length ? (nowPlaying.map((movie) => (
     <MovieCard key={movie.id} movie={movie}></MovieCard>
     ))) : <div className="loader-container"> <Loader></Loader> </div>
-    seriesRender = series.length ? (series.map((serie) => (
-      <MovieCard key={serie.id} movie={serie}></MovieCard>
-    ))) : ''
-  
+    upcomingRender = upcoming.length ? (upcoming.map((movie) => (
+    <MovieCard key={movie.id} movie={movie}></MovieCard>
+    ))) : <div className="loader-container"> <Loader></Loader> </div>
+    topRatedRender = topRated.length ? (topRated.map((movie) => (
+    <MovieCard key={movie.id} movie={movie}></MovieCard>
+    ))) : <div className="loader-container"> <Loader></Loader> </div>
   return (
     <div>
       <div className="movie-wrapper">
         <div className="movie-list">
-          <h2>Movies</h2>
+          <h2>Now playing</h2>
           <div className="movie-container" >
-            {movieRender}
+            {nowPlayingRender}
           </div>
         </div>
         <div className="movie-list">
-          <h2>Series</h2>
+          <h2>Upcoming</h2>
           <div className="movie-container" >
-            {seriesRender}
+            {upcomingRender}
+          </div>
+        </div>
+        <div className="movie-list">
+          <h2>Top rated</h2>
+          <div className="movie-container" >
+            {topRatedRender}
           </div>
         </div>
       </div>

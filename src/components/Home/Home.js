@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MovieListing from "../MovieListing/MovieListing";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies, fetchSeries } from "../../features/rtk/movies/movieSlice";
+import { fetchMovies} from "../../features/rtk/movies/movieSlice";
 import "./Home.scss";
 
 function Home() {
@@ -29,8 +29,9 @@ function Home() {
   }
 
   useEffect(() => {
-    dispatch(fetchMovies());
-    dispatch(fetchSeries());
+    dispatch(fetchMovies('now_playing'));
+    dispatch(fetchMovies('upcoming'));
+    dispatch(fetchMovies('top_rated'));
   }, [dispatch]);
 
   return (
