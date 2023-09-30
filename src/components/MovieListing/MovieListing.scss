@@ -12,7 +12,8 @@
 .movie-container{
     display: flex;
     justify-content: space-between;
-    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 .movie-container::after {
     content: "";
