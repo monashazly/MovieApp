@@ -12,11 +12,11 @@ function Home() {
   const movies = useSelector((state) => state.movies.movies);
 
   const searchMovie = () => {
-    const movie = searchQuery
-      ? movies.find((movie) => movie.title.toLowerCase().includes(searchQuery))
-      : null;
+    console.log( 'searchQuery',searchQuery);
+    const movie = searchQuery? movies.find((movie) => movie.title.toLowerCase().includes(searchQuery)): null;
+    console.log('movie' , movie)
     const movieID = movie ? movie.id : null;
-    navigate(`/movie/${movieID}`);
+    // navigate(`/movie/${movieID}`);
   };
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
