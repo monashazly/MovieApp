@@ -2,25 +2,24 @@ import "./MovieCast.scss"
 import { useParams } from "react-router-dom";
 import movieApi from "../../common/apis/movieApi";
 import { api_key } from "../../common/apis/movieApiKey";
-import { useEffect, useState } from "react";
+import { useEffect, useState , useMemo } from "react";
 import ActorCard from "../ActorCard/ActorCard";
 
 const MovieCast = () => {
     const [ cast , setCast ] = useState([])
     const { TMDPID } = useParams();
-    const params = {
+    const params = useMemo(() => ({
         api_key,
-      };
+    }), []);
 
     useEffect(()=>{
-
         const fetchCast = async()=>{
             const cast = await movieApi.get(`/movie/${TMDPID}/credits`, { params })
             setCast(cast.data.cast.slice(0,10))
         }
 
         fetchCast();
-    } , [TMDPID])
+    } , [TMDPID , params])
 
     return (
         <div className="cast-container">

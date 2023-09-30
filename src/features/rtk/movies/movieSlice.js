@@ -32,7 +32,7 @@ export const fetchMovie = createAsyncThunk('movieSlice/fetchMovie', async (selec
    } 
    else
    {
-      const selectedMovie = state.movies.find((movie) => movie.id == selectedId);
+      const selectedMovie = state.movies.find((movie) => movie.id === +selectedId);
       return selectedMovie;
    }
  });
@@ -50,7 +50,7 @@ const movieSlice = createSlice({
     },
     extraReducers :(builder)=>{
        builder.addCase(fetchMovies.fulfilled , (state , action)=>{
-         
+
          const { type , data } = action.payload
          const updatedMovies = [].concat(...state.movies, data)
       
