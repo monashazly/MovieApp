@@ -5,7 +5,6 @@ import './MovieDetails.scss'
 function MovieDetails() {
   return (
     <>
-    <div> options</div>
       <div className="backdrop">
         <MovieBackdrop></MovieBackdrop>
       </div>

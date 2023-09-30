@@ -5,10 +5,10 @@ import "./MovieListing.scss"
 import Loader from "../Loader/Loader";
 
 const MovieListing = () => {
-  const nowPlaying = useSelector((state) => state.movies.nowPlaying);
+  const nowPlaying = useSelector((state) => state.movies.now_playing);
   const upcoming = useSelector((state) => state.movies.upcoming);
-  const topRated = useSelector((state) => state.movies.topRated);
-  
+  const topRated = useSelector((state) => state.movies.top_rated);
+
   let nowPlayingRender = '';
   let upcomingRender = '';
   let topRatedRender = '';

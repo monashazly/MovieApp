@@ -20,7 +20,7 @@ const MovieCast = () => {
         }
 
         fetchCast();
-    } , [])
+    } , [TMDPID])
 
     return (
         <div className="cast-container">

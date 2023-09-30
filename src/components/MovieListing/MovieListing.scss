@@ -33,3 +33,9 @@
     justify-content: center;
     width: 100%;
   }
+  @media screen and (max-width :700px){
+    .movie-list{
+        margin: 10px;
+    }
+    
+  }

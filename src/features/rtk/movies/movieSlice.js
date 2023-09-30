@@ -7,9 +7,10 @@ const params = {
   };
 
 const initialState = {
-  nowPlaying : [],
-  topRated :[],
+  now_playing : [],
+  top_rated :[],
   upcoming :[],
+  movies : [],
   selectedMovie : {}
 }
 
@@ -49,9 +50,11 @@ const movieSlice = createSlice({
     },
     extraReducers :(builder)=>{
        builder.addCase(fetchMovies.fulfilled , (state , action)=>{
-            if(action.payload.type === 'now_playing') return { ...state , nowPlaying :  action.payload.data} 
-            else if(action.payload.type === 'upcoming') return { ...state , upcoming : action.payload.data} 
-            return { ...state , topRated : action.payload.data} 
+         
+         const { type , data } = action.payload
+         const updatedMovies = [].concat(...state.movies, data)
+      
+         return { ...state , [type]: data ,  movies: updatedMovies}
        })
        builder.addCase(fetchMovie.fulfilled , (state , action)=>{
           state.selectedMovie = action.payload

@@ -54,3 +54,16 @@
     font-size: 1em;
     font-weight: 300;
  }
+ @media screen and (max-width :700px){
+   .movie-content{
+      padding: 10px;
+      flex-direction: column;
+   }
+   .movie-header{
+      font-size: calc(.7em + 3vw);
+      margin-bottom: 5px;
+   }
+   .movie-info{
+      width: 100%;
+   }
+ }
