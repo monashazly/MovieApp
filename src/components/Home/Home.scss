@@ -20,7 +20,7 @@
 .input-container{
     position: relative;
 }
-.search-btn{
+input[type ="submit"]{
     position: absolute;
     bottom: 0;
     right: 0;
@@ -31,6 +31,6 @@
     color: white;
     font-weight: 500;
 }
-.search-btn:hover{
+input[type ="submit"]:hover{
     color: black;
 }
