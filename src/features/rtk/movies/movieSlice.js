@@ -11,11 +11,12 @@ const initialState = {
   top_rated :[],
   upcoming :[],
   movies : [],
-  selectedMovie : {}
+  selectedMovie : {},
+  searchMovies : []
 }
 
-export const fetchMovieWithApi = createAsyncThunk('movieSlice/fetchMovieWithApi' , async(TMDPID)=>{
-   const response = await movieApi.get(`/movie/${TMDPID}`, { params });
+export const fetchMovieWithApi = createAsyncThunk('movieSlice/fetchMovieWithApi' , async({TMDPID, target})=>{
+   const response = await movieApi.get(`/${target}/${TMDPID}`, { params });
    return  response.data
 })
 
@@ -24,17 +25,19 @@ export const fetchMovies = createAsyncThunk('movieSlice/fetchMovies' , async(typ
     return {data : response.data.results , type} 
 }) 
 
+export const fetchSearchMovies = createAsyncThunk('movieSlice/fetchSearchMovies' , async(query)=>{
+    const response = await movieApi.get(`/search/multi?query=${query}` , {params})
+    return response.data.results
+})
 
-export const fetchMovie = createAsyncThunk('movieSlice/fetchMovie', async (selectedId , { getState , dispatch}) => {
+export const fetchMovie = createAsyncThunk('movieSlice/fetchMovie', async ({TMDPID, target} , { getState , dispatch}) => {
+
    const state = getState().movies;
-   if(!state.movies.length){
-       dispatch(fetchMovieWithApi(selectedId))
-   } 
-   else
-   {
-      const selectedMovie = state.movies.find((movie) => movie.id === +selectedId);
-      return selectedMovie;
-   }
+   const selectedMovie = state.movies.find((movie) => movie.id === +TMDPID);
+
+   if(selectedMovie) return selectedMovie
+   else dispatch(fetchMovieWithApi({ TMDPID, target }))
+
  });
 
 const movieSlice = createSlice({
@@ -62,6 +65,9 @@ const movieSlice = createSlice({
        builder.addCase(fetchMovieWithApi.fulfilled , (state , action)=>{
           state.selectedMovie = action.payload
        })
+       builder.addCase(fetchSearchMovies.fulfilled , (state , action) =>{
+         state.searchMovies = action.payload
+       } )
     }
 })
 

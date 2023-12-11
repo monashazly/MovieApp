@@ -1,0 +1,24 @@
+.actor-poster{
+    width: 70px;
+    min-width: 70px;
+    height: 70px;
+    border-radius: 8px ;
+    overflow: hidden;
+    background-color: #dbdbdb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.actor-img{
+    max-width: 100%;
+    object-fit:cover;
+}
+.actor-overview{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+.actor-known-for{
+    font-size: 1em;
+    font-weight: 200;
+}

@@ -1,0 +1,11 @@
+.results-card-container{
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+}
+
+@media screen and (max-width:462px) {
+    .results-card-container{
+        padding: 16px;
+    }
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch , useSelector } from "react-redux"
-import {useParams} from "react-router-dom"
+import {useParams , useLocation} from "react-router-dom"
 import { imgBaseURL } from "../../common/apis/imgBaseURL";
 import "./MovieBackdrop.scss";
 import MovieRating from "../MovieRating/MovieRating";
@@ -11,13 +11,17 @@ const MovieBackdrop = () => {
   const [releaseDate, setReleaseDate] = useState();
   const { TMDPID } = useParams();
   const dispatch = useDispatch();
+  const location = useLocation();
   const movie = useSelector(state => state.movies.selectedMovie)
+  
+  const target = location.pathname.includes('movie') ? 'movie' : 'tv';
+
 
   useEffect(() => {
 
-    dispatch(fetchMovie(TMDPID))
+    dispatch(fetchMovie({ TMDPID, target }))
 
-  }, [dispatch , TMDPID ]);
+  }, [dispatch , TMDPID , target]);
 
   useEffect(() => {
     const dateString = movie?.release_date;

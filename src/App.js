@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
+import SearchMovie from "./components/SearchMovie/SearchMovie";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 
 function App() {
@@ -17,6 +18,14 @@ function App() {
           <Route
             path="/movie/:TMDPID"
             element={<MovieDetails></MovieDetails>}
+          ></Route>
+          <Route
+            path="/tv/:TMDPID"
+            element={<MovieDetails></MovieDetails>}
+          ></Route>
+          <Route
+            path="/search/*"
+            element={<SearchMovie></SearchMovie>}
           ></Route>
           <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
         </Routes>

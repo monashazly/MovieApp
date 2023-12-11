@@ -1,0 +1,44 @@
+
+@import "../../common/colors.scss";
+
+.results-container{
+    display: flex;
+    justify-content: space-between;
+    padding: $global-padding;
+}
+.search-header{
+   border-bottom: 1px solid  #cfcece;
+   position: relative;
+}
+.search-icon{
+    position: absolute;
+    top:30%;
+    left:3%
+}
+.search-header-input{
+    width: 100%;
+    border-style: none;
+    padding :10px 6%
+}
+.search-results-component{
+    width: 25%;
+}
+.search-cards{
+    width: 73%
+}
+@media screen and (max-width:462px){
+    .results-container{
+        flex-direction: column;
+        gap:15px;
+        padding: 0
+    }
+    .search-results-component{
+        width: 100%;
+    }
+    .search-cards{
+        width: 100%;
+    }
+    .search-header-input{
+        padding :10px 9%
+    }
+}

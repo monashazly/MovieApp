@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MovieListing from "../MovieListing/MovieListing";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { fetchMovies} from "../../features/rtk/movies/movieSlice";
 import "./Home.scss";
 
@@ -9,15 +9,11 @@ function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const movies = useSelector((state) => state.movies.movies);
+
 
   const searchMovie = () => {
-    console.log( 'searchQuery',searchQuery);
-    const movie = searchQuery? movies.find((movie) => movie.title.toLowerCase().includes(searchQuery)): null;
-    console.log('movie' , movie)
-    const movieID = movie ? movie.id : null;
-    if(!movieID) navigate(`/not-found`);
-    else navigate(`/movie/${movieID}`);
+
+    navigate(`/search/movies?query=${encodeURIComponent(searchQuery)}`);
   };
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
@@ -47,7 +43,7 @@ function Home() {
             <input
               className=" input-style"
               type="text"
-              placeholder="Search Movies...."
+              placeholder="Search Movies , Tv or Person ...."
               onChange={handleSearch}
               onKeyUp={handleKeyUp}
             />
