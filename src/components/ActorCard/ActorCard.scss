@@ -9,7 +9,13 @@
     overflow: hidden;
     max-height: 300px;
 }
-
+.img-container{
+    background-color: #dbdbdb;
+    display: flex;
+    justify-content: center;
+    min-height: 207px;
+    align-items: center;
+}
 .actor-profile{
     width: 100%;
     object-fit: cover;
